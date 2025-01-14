@@ -1,0 +1,36 @@
+{
+  /*
+   특정 경로내의 모든 파일을 컴파일 
+   - 설정하면 별도의 경로를 지정하지 않아도 알아서 지정한 경로 내의 모든 파일을 컴파일
+   - tsc 명령어만 입력하면 지정한 경로 내의 모든 파일을 컴파일
+  */
+  "include": ["src"],
+  // compilerOptions: 컴파일 옵션(JS로 변환하는 과정이나, 타입 검사의 엄격함)의 상세한 부분을 설정
+  "compilerOptions": {
+    // 어떤 버전의 JS로 컴파일할지 설정 - target 옵션에 따라 생성되는 JS 파일의 코드가 달라진다.
+    "target": "ESNext",
+
+    // 컴파일된 파일의 모듈 시스템 설정 - ts파일은 기본적으로 ESM 모듈 시스템을 사용
+    /**
+     * 만약 ESNext를 쓰고 있는데 ts-node로 실행시 에러가 난다면?
+     * package.json에 "type": "module"을 추가
+     * -> compilerOptions 바깥에 ts-node : { "esm": true } 추가
+     *
+     * tsx를 쓰고있다면 별다른 문제 없이 작동함.
+     */
+    "module": "ESNext",
+
+    // 컴파일 결과물이 생성될 경로
+    "outDir": "dist",
+
+    // 타입검사의 엄격함 정도 설정 - strict 옵션을 true로 설정하면 타입 검사가 엄격해진다.
+    "strict": false,
+
+    // 타입스크립트가 각각의 파일을 어떤 모듈로 감지할 것인지 설정 - force로 설정하면 파일을 개별 모듈로 감지
+    // 컴파일 결과를 보면 모듈 시스템 사용 문법이 추가되어 있다.
+    "moduleDetection": "force",
+
+    // skipLibCheck: 해당 옵션은 타입정의 파일(*.d.ts)의 타입 검사를 생략하는 옵션 - undici-types 에러 방지용
+    "skipLibCheck": true
+  }
+}
